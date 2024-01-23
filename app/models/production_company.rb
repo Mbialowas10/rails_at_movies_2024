@@ -1,4 +1,4 @@
 class ProductionCompany < ApplicationRecord
   has_many :movies
-  validates :name, presence: true, uniqueness: true
+  validates :name, uniqueness: true
 end
