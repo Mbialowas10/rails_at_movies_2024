@@ -1,0 +1,9 @@
+<h1>Production Companies</h1>
+
+<ul>
+  <% @production_companies.each do | p | %>
+  <li>
+    <%= link_to p.name, p, style:"border:1px solid red" %>
+  </li>
+  <% end %>
+</ul>
