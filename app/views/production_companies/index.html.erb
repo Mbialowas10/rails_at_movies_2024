@@ -3,7 +3,8 @@
 <ul>
   <% @production_companies.each do | p | %>
   <li>
-    <%= link_to p.name, p, style:"border:1px solid red" %>
+    <%= link_to p.name, p %>
+    <em>(<%= pluralize p.movie_count, "Top Movie" %>)</em>
   </li>
   <% end %>
 </ul>

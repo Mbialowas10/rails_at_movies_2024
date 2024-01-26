@@ -1,0 +1,43 @@
+<h1>Home#index</h1>
+
+<div class="columns">
+  <div class="column">
+    <h2 class="title is-2">
+      Top 10 Movies
+    </h2>
+    <ol class="ml-5">
+      <% @movies.each do |m| %>
+      <li>
+        <%= link_to m.title, m %>
+        <em>
+          (<%= m.production_company.name %>)
+        </em>
+      </li>
+      <% end %>
+    </ol>
+    <p class="mt-5">
+      <strong>
+        <%= link_to '👉 See the Top 100 Movies', movies_path %>
+      </strong>
+    </p>
+  </div>
+  <div class="column">
+    <h2 class="title is-2">
+      Top 10 Production Companies
+    </h2>
+    <ol class="ml-5">
+
+        <% @production_companies.each do |p| %>
+        <li>
+          <%= link_to p.name, p %>
+          <em>(<%= pluralize p.movies.count, "Top Movie" %>)</em>
+        <% end %>
+      </li>
+    </ol>
+    <p class="mt-5">
+      <strong>
+        <%= link_to '👉 See the Top Production Companies', production_companies_path %>
+      </strong>
+    </p>
+  </div>
+</div>
