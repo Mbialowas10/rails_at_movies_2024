@@ -2,6 +2,7 @@ require 'csv'
 
 Movie.delete_all
 ProductionCompany.delete_all
+Page.delete_all
 
 #fetch the filename
 filename = Rails.root.join("db/top_movies.csv")
@@ -31,3 +32,14 @@ end
 
 puts "Created #{ProductionCompany.count} Production companies"
 puts "Created #{Movie.count} Movies..."
+
+Page.create(
+  title: 'About the data',
+  context: 'The data powering this great website was supplied by Kaggle.',
+  permalink: "about"
+)
+Page.create(
+  title: 'Contact Us',
+  context: 'If you like this site and want to chat, please reach out obviouslyFake@email.com',
+  permalink: 'contact'
+)

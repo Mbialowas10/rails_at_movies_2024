@@ -1,10 +1,5 @@
 <h1>Production Companies</h1>
 
 <ul>
-  <% @production_companies.each do | p | %>
-  <li>
-    <%= link_to p.name, p %>
-    <em>(<%= pluralize p.movie_count, "Top Movie" %>)</em>
-  </li>
-  <% end %>
+  <%= render @production_companies %>
 </ul>
