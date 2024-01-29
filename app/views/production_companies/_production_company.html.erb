@@ -1,0 +1,7 @@
+
+  <% @production_companies.each do |c| %>
+    <li>
+      <%= link_to c.name, c %>
+      <em>(<%= pluralize c.movie_count, "Top Movie" %> )</em>
+    </li>
+  <% end %>

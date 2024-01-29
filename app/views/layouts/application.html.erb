@@ -18,6 +18,11 @@
       </div>
 
       <%= yield %>
+      <% if controller_name == 'home' %>
+        <p>There's no place like home!</p>
+      <% else %>
+        <%= render partial: 'common/footer' %>
+      <% end %>
     </section>
   </body>
 </html>
