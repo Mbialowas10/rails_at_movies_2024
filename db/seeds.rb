@@ -2,6 +2,10 @@ require "csv"
 
 Movie.delete_all
 ProductionCompany.delete_all
+Page.delete_all
+Genre.delete_all
+MovieGenre.delete_all
+
 
 # get the path to the csv file
 filename = Rails.root.join("db/top_movies.csv")
@@ -25,9 +29,32 @@ movies.each do |m|
       average_vote: m["avg_vote"]
     )
     puts "Invalid movie #{m['original_title']}" unless movie&.valid?
+
+    genres = m["genre"].split(",").map(&:strip) # collection.map { |item |}
+    genres.each do |genre_name|
+      #puts genre_name
+      genre = Genre.find_or_create_by(name: genre_name)
+      #puts genre
+      MovieGenre.create(movie:movie, genre: genre)
+    end
+
+
   else
     puts "invalid production company #{m["production_company" ]} for movie #{m['original_title']}."
   end
   puts "Created #{ProductionCompany.count} Production companies"
-
+  puts "Created #{Movie.count} Movies"
+  puts "Created #{Genre.count} Genres"
+  puts "Created #{MovieGenre.count} Movie Genres"
 end
+
+Page.create(
+  title: 'About the data',
+  content: 'The data powering this website is brought to you by Kaggle.',
+  permalink: 'about'
+)
+Page.create(
+  title:'Contact Us',
+  content: 'If you like this site, reach out to obviouslyfake@fake.com',
+  permalink:'contact'
+)
