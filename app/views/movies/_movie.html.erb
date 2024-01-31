@@ -15,6 +15,13 @@
 
 <p>
   <strong>
+    Genres:
+  </strong>
+  <%= movie.genres.map(&:name).join(",") %>
+</p>
+
+<p>
+  <strong>
     Rating:
   </strong>
   <%= movie.average_vote %>
