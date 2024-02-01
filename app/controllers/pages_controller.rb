@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :set_page, only: %i[ show edit update destroy ]
+  before_action :set_page, only: %i[ show update destroy ]
   http_basic_authenticate_with name: "user", password: "password", except: [:show]
   # GET /pages or /pages.json
   def index
@@ -18,6 +18,7 @@ class PagesController < ApplicationController
 
   # GET /pages/1/edit
   def edit
+    @page = Page.find_by(permalink: params[:id])
   end
 
   # POST /pages or /pages.json

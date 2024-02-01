@@ -9,7 +9,13 @@
   </div>
 </article>
 
+<p>
+  <strong>
 
+    <%= pluralize(movie.genres.count, "Genre") %>
+  </strong>
+  <%= movie.genres.map(&:name).join(",") %>
+</p>
 
 <progress class="progress is-info" value="<%=movie.average_vote%>" max=10>
   <%= movie.average_vote %>
