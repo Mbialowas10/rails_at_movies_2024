@@ -1,10 +1,14 @@
 <p style="color: green"><%= notice %></p>
 
-<%= render @page %>
+<% if @page %>
+  <%= render @page %>
 
-<div>
-  <%= link_to "Edit this page", edit_page_path(@page.permalink) %> |
-  <%= link_to "Back to pages", pages_path %>
+  <div>
+    <%= link_to "Edit this page", edit_page_path(@page.permalink) %> |
+    <%= link_to "Back to pages", pages_path %>
 
-  <%= button_to "Destroy this page", @page, method: :delete %>
-</div>
+    <%= button_to "Destroy this page", @page, method: :delete %>
+  </div>
+  <% else %>
+    <p>Page not found.</p>
+  <% end %>

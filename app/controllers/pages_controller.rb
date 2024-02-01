@@ -1,5 +1,5 @@
 class PagesController < ApplicationController
-  before_action :set_page, only: %i[ show edit update destroy ]
+  before_action :set_page, only: %i[ show update destroy ]
   http_basic_authenticate_with name: "user", password: "password", except: :show
   # GET /pages or /pages.json
   def index
@@ -18,6 +18,7 @@ class PagesController < ApplicationController
 
   # GET /pages/1/edit
   def edit
+    @page = Page.find_by(permalink: params[:id])
   end
 
   # POST /pages or /pages.json
@@ -35,18 +36,26 @@ class PagesController < ApplicationController
     end
   end
 
+
+
   # PATCH/PUT /pages/1 or /pages/1.json
   def update
     respond_to do |format|
-      if @page.update(page_params)
-        format.html { redirect_to page_url(@page), notice: "Page was successfully updated." }
-        format.json { render :show, status: :ok, location: @page }
+      if @page
+        if @page.update(page_params)
+          format.html { redirect_to page_url(@page), notice: 'Page was successfully updated.' }
+          format.json { render :show, status: :ok, location: @page }
+        else
+          format.html { render :edit, status: :unprocessable_entity }
+          format.json { render json: @page.errors, status: :unprocessable_entity }
+        end
       else
         format.html { render :edit, status: :unprocessable_entity }
-        format.json { render json: @page.errors, status: :unprocessable_entity }
+        format.json { render json: { error: 'Page not found' }, status: :not_found }
       end
     end
   end
+
 
   # DELETE /pages/1 or /pages/1.json
   def destroy
